@@ -11,14 +11,14 @@ namespace LineComparison
                 
         public void GetEndPoints() {
             InputPoint:
-            Console.WriteLine("Enter x1 and y1 points(x1 y1): ");
+            Console.WriteLine("Enter line points x1 and y1 points(x1 y1): ");
             try
             {
                 String[] input = Console.ReadLine().Split(" ");
                 x1 = Convert.ToInt32(input[0]);
                 y1 = Convert.ToInt32(input[1]);
 
-                Console.WriteLine("Enter x2 and y2 points(x2 y2): ");
+                Console.WriteLine("Enter line points x2 and y2 points(x2 y2): ");
                 input = Console.ReadLine().Split(" ");
                 x2 = Convert.ToInt32(input[0]);
                 y2 = Convert.ToInt32(input[1]);
@@ -46,15 +46,31 @@ namespace LineComparison
             else
                 Console.WriteLine("lines are not equal");
         }
+        private void CompareLines()
+        {
+            Console.WriteLine("\nLine 1");
+            GetEndPoints();
+            float LineLenght1 = CalculateLength();
+            Console.WriteLine("\nLine 2");
+            GetEndPoints();
+            float LineLenght2 = CalculateLength();
+
+            if (LineLenght1.CompareTo(LineLenght2) == 0)
+                Console.WriteLine("both lines are equal");
+            else if (LineLenght1.CompareTo(LineLenght2) > 0)
+                Console.WriteLine("first line is bigger than second");
+            else
+                Console.WriteLine("first line is smaller than second");
+        }
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Line Comparison Computation Program");
-
             LineComparison lineComparison = new LineComparison();
-         
+            Console.WriteLine("Welcome to Line Comparison Computation Program");
+        
             lineComparison.GetEndPoints();
             lineComparison.CalculateLength();
-            lineComparison.CheckEqualLines();         
-        }
+            lineComparison.CheckEqualLines();
+            lineComparison.CompareLines();
+        }      
     }
 }
